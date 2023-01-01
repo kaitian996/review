@@ -1,0 +1,16 @@
+.app{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction: column;
+}
+.home{
+  font-size: 25px;
+  font-weight: 600px;
+}
+.add,.deadd{
+  margin: 20px 0;
+  background-color: #bfa;
+}
