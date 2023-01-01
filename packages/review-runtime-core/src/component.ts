@@ -17,7 +17,7 @@ export function createComponentInstance(vnode) {
 
 export let currentInstance: null | object = null  //当前的实例对象
 export const setCurrentInstance = instance => currentInstance = instance //设置实例
-export const getCurrentInstance = () => currentInstance //在setup中获取当前实例
+export const getCurrentInstance = () => currentInstance //获取当前实例
 //配置对应的实例属性，然后与执行函数
 export function setupComponent(instance) {
     currentInstance = instance
