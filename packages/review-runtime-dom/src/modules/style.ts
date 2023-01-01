@@ -1,14 +1,19 @@
-
-export const patchStyle = (element: HTMLElement, prevValue: any, nextValue: any) => {
+export const patchStyle = (
+    element: HTMLElement,
+    prevValue: any,
+    nextValue: any
+) => {
     const style: any = element.style //之前样式
     if (nextValue === null) {
-        element.removeAttribute('style')
+        element.removeAttribute("style")
     } else {
         //老的有新的没有
-        if (prevValue) { //需要删除
+        if (prevValue) {
+            //需要删除
             for (const key in prevValue) {
-                if (nextValue[key] === null) { //需要删除
-                    style[key] = ''
+                if (nextValue[key] === null) {
+                    //需要删除
+                    style[key] = ""
                 }
             }
         }

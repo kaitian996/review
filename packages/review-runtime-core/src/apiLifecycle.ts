@@ -1,33 +1,39 @@
-import { currentInstance, setCurrentInstance } from './component'
+import { currentInstance, setCurrentInstance } from "./component"
 export const enum LifecycleHooks {
-    BEFORE_CREATE = 'bc',
-    CREATED = 'c',
-    BEFORE_MOUNT = 'bm',
-    MOUNTED = 'm',
-    BEFORE_UPDATE = 'bu',
-    UPDATED = 'u',
-    BEFORE_UNMOUNT = 'bum',
-    UNMOUNTED = 'um',
-    DEACTIVATED = 'da',
-    ACTIVATED = 'a',
-    RENDER_TRIGGERED = 'rtg',
-    RENDER_TRACKED = 'rtc',
-    ERROR_CAPTURED = 'ec',
-    SERVER_PREFETCH = 'sp'
+    BEFORE_CREATE = "bc",
+    CREATED = "c",
+    BEFORE_MOUNT = "bm",
+    MOUNTED = "m",
+    BEFORE_UPDATE = "bu",
+    UPDATED = "u",
+    BEFORE_UNMOUNT = "bum",
+    UNMOUNTED = "um",
+    DEACTIVATED = "da",
+    ACTIVATED = "a",
+    RENDER_TRIGGERED = "rtg",
+    RENDER_TRACKED = "rtc",
+    ERROR_CAPTURED = "ec",
+    SERVER_PREFETCH = "sp",
 }
 export function invokerArrayFns(fns: Function[]) {
     for (let i = 0; i < fns.length; i++) {
         fns[i]()
     }
 }
-function injectHook(type: LifecycleHooks, hook: Function, target: object | null) {
+function injectHook(
+    type: LifecycleHooks,
+    hook: Function,
+    target: object | null
+) {
     if (!target) {
-        return console.warn('injectHook APIs can only be used in function component')
+        return console.warn(
+            "injectHook APIs can only be used in function component"
+        )
     } else {
         const hooks: Function[] = target[type] || (target[type] = [])
         //包装一下钩子
         const wrap = () => {
-            setCurrentInstance(target)  //设置currentInstance为自己的 在执行钩子的时候
+            setCurrentInstance(target) //设置currentInstance为自己的 在执行钩子的时候
             hook.call(target)
             setCurrentInstance(null) //
         }
@@ -35,7 +41,8 @@ function injectHook(type: LifecycleHooks, hook: Function, target: object | null)
     }
 }
 function createHook(lifecycle: LifecycleHooks) {
-    return (hook: Function, target: object | null = currentInstance) => { //target用来表示他是哪个实例的钩子
+    return (hook: Function, target: object | null = currentInstance) => {
+        //target用来表示他是哪个实例的钩子
         injectHook(lifecycle, hook, target)
     }
 }

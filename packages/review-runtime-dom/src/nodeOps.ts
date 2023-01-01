@@ -10,14 +10,19 @@ export const nodeOps = {
         }
     },
     //增
-    insert: (child: Element, parent: Element, anchor: Element | null = null) => {
+    insert: (
+        child: Element,
+        parent: Element,
+        anchor: Element | null = null
+    ) => {
         parent.insertBefore(child, anchor)
     },
     //查
     querySelector: (selector: string) => document.querySelector(selector),
-    setElementText: (element: Element, text: string) => element.textContent = text,
+    setElementText: (element: Element, text: string) =>
+        (element.textContent = text),
     nextSibling: (node: Element) => node.nextSibling,
     //文本操作
     createText: (text: string) => document.createTextNode(text),
-    setText: (node: Node, text: string) => node.nodeValue = text
+    setText: (node: Node, text: string) => (node.nodeValue = text),
 }

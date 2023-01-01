@@ -1,6 +1,6 @@
 type EffectOptions = {
-    scheduler?: (...args: any[]) => any;
-    lazy?: boolean;
+    scheduler?: (...args: any[]) => any
+    lazy?: boolean
 }
 export let activeEffect: any
 let uid: number = 0
@@ -23,7 +23,7 @@ export function effect(fn: Function, options?: EffectOptions) {
     return effectFn
 }
 /**
- * 
+ *
  * @param target 收集的对象
  * @param key key
  */
@@ -47,8 +47,7 @@ export function track(target: object, key: string | symbol) {
     deps.add(activeEffect)
     //将依赖添加到数组中
     activeEffect.deps.push(deps)
-    console.log('触发track');
-
+    console.log("触发track")
 }
 
 export function trigger(taget: object, key: string | symbol) {
@@ -56,19 +55,20 @@ export function trigger(taget: object, key: string | symbol) {
     if (!depMap) return
     const effects = depMap.get(key)
     const effectToRun = new Set<any>()
-    effects && effects.forEach(effectFn => {
-        if (effectFn !== activeEffect) {
-            effectToRun.add(effectFn)
-        }
-    })
-    effectToRun.forEach(effectFn => {
+    effects &&
+        effects.forEach((effectFn) => {
+            if (effectFn !== activeEffect) {
+                effectToRun.add(effectFn)
+            }
+        })
+    effectToRun.forEach((effectFn) => {
         if (effectFn?.options?.scheduler) {
             effectFn.options.scheduler(effectFn)
         } else {
             effectFn()
         }
     })
-    console.log('触发trigger');
+    console.log("触发trigger")
 }
 
 function cleanup(effectFn: any) {

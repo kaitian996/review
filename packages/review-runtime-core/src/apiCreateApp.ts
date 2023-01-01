@@ -16,7 +16,7 @@ export function createAppAPI(render: Function) {
                 render(vnode, container)
 
                 app._container = container
-            }
+            },
         }
         return app
     }

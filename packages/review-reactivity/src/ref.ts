@@ -1,10 +1,10 @@
-import { reactive } from './reactive'
+import { reactive } from "./reactive"
 export function ref<T>(target: T) {
     const wrapper = {
-        value: target
+        value: target,
     }
-    Object.defineProperty(wrapper, '__v_isRef', {
-        value: true
+    Object.defineProperty(wrapper, "__v_isRef", {
+        value: true,
     })
     return reactive(wrapper)
 }
@@ -14,8 +14,8 @@ export function toRef(target: object, key: string) {
             return (target as any)[key]
         },
         set value(value) {
-            (target as any)[key] = value
-        }
+            ;(target as any)[key] = value
+        },
     }
     return wrapper
 }

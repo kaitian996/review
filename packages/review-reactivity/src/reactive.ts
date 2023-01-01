@@ -1,4 +1,4 @@
-import { trigger, track } from './effect'
+import { trigger, track } from "./effect"
 export function reactive<T extends object>(target: T): any {
     return createReactive(target)
 }
@@ -8,10 +8,14 @@ export function shallowReactive<T extends object>(target: T): any {
 export function readonly<T extends object>(target: T): any {
     return createReactive(target, false, true)
 }
-function createReactive(target: object, isShallow: boolean = false, isReadonly: boolean = false) {
+function createReactive(
+    target: object,
+    isShallow: boolean = false,
+    isReadonly: boolean = false
+) {
     return new Proxy(target, {
         get(target, key, receiver) {
-            if (key === 'raw') {
+            if (key === "raw") {
                 return target
             }
             track(target, key)
@@ -20,7 +24,7 @@ function createReactive(target: object, isShallow: boolean = false, isReadonly: 
             if (isShallow) {
                 return result
             }
-            if (typeof result === 'object' && result !== null) {
+            if (typeof result === "object" && result !== null) {
                 return reactive(result)
             }
             return result
@@ -33,7 +37,10 @@ function createReactive(target: object, isShallow: boolean = false, isReadonly: 
             const oldVal = (target as any)[key]
             const result = Reflect.set(target, key, newVal, receiver)
             if (target === receiver.raw) {
-                if (oldVal !== newVal && (oldVal === oldVal || newVal === newVal)) {
+                if (
+                    oldVal !== newVal &&
+                    (oldVal === oldVal || newVal === newVal)
+                ) {
                     trigger(target, key)
                 }
             }
@@ -42,6 +49,6 @@ function createReactive(target: object, isShallow: boolean = false, isReadonly: 
         has(target, key) {
             track(target, key)
             return Reflect.has(target, key)
-        }
+        },
     })
 }
