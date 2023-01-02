@@ -257,9 +257,12 @@ export function createRenderer(rendererOptions: any) {
             //表示有新增的部分
             //从i到e2添加，
             const nextPos = e2 + 1
-            //BUG:如果这里是组件，会出现bug
-            const anchor = nextPos < c2.length ? c2[nextPos].el : null //如果比它小，就是向前添加
-
+            const anchor =
+                nextPos < c2.length
+                    ? isFunction(c2[nextPos].type)
+                        ? c2[nextPos].component.subTree.el
+                        : c2[nextPos].el
+                    : null
             while (i <= e2) {
                 patch(null, c2[i], container, anchor) //只是向后添加
                 i++
