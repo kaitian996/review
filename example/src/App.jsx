@@ -17,20 +17,40 @@ export const App = () => {
         count.value++
     }
     console.log(typeof Hello)
-    return () => {
-        return (
-            <div className="app">
-                <div>{count.value}</div>
-                <input type="text" name="" id="" onInput={handleInput} />
-                <div>{input.value}</div>
-                <button className="add" onClick={add}>
-                    增加
-                </button>
-                <button className="deadd" onClick={deadd}>
-                    减少
-                </button>
-                <Hello give={give}>子组件传递</Hello>
-            </div>
-        )
-    }
+    const flag = ref(true)
+
+    return (
+        <div className="app">
+            {flag.value ? (
+                <div>
+                    <div>{count.value}</div>
+                    <input type="text" name="" id="" onInput={handleInput} />
+                    <div>{input.value}</div>
+                    <button className="add" onClick={add}>
+                        增加
+                    </button>
+                    <button className="deadd" onClick={deadd}>
+                        减少
+                    </button>
+                    <Hello give={give}>子组件传递</Hello>
+                    <div>占位符</div>
+                </div>
+            ) : (
+                <div>
+                    <div>{count.value}</div>
+                    <input type="text" name="" id="" onInput={handleInput} />
+                    <div>{input.value}</div>
+                    <button className="add" onClick={add}>
+                        增加
+                    </button>
+                    <button className="deadd" onClick={deadd}>
+                        减少
+                    </button>
+                    <div>要增加的</div>
+                    <Hello give={give}>子组件传递</Hello>
+                    <div>占位符</div>
+                </div>
+            )}
+        </div>
+    )
 }
