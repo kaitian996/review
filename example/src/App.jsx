@@ -1,4 +1,4 @@
-import { ref } from "../../packages/review/dist/review.esm-bundler"
+import { ref } from "@sakurasz/review"
 import "./App.css"
 import { Hello } from "./Hello"
 export const App = () => {

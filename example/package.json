@@ -9,13 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sakurasz/review": "^1.0.0",
+    "@sakurasz/review-plugins": "^1.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
     "@babel/plugin-syntax-jsx": "^7.18.6",
-    "@sakurasz/review-plugins": "^1.0.2",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
