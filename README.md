@@ -18,15 +18,12 @@ Therefore, it needs to be set in the vite.config .js
 ```js
 //vite.config.js
 import { defineConfig } from "vite"
+import  review  from "@sakurasz/review-plugins" // review plugin,
+//notice:review plugin depend on @babel/core and @babel/plugin-syntax-jsx so you must to isntall these packages
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [],
-    esbuild: {
-        jsxFactory: "h", //JSX will be translated into the h function 
-        jsxInject:
-            'import { h } from "../../packages/review/dist/review.esm-bundler"',//VITE injects the h function for each .jsx file
-    },
+    plugins: [review()],
 })
 ```
 
@@ -37,28 +34,25 @@ You can see example for more detail
 You can organize your project like react
 
 ```js
-//this is a children component
+//this is a child component
 export const Hello = (props) => {
 
     const handler=()=>{
         props.give()
     }
-    //you now show return a function as render function 
-    //I will write a plugin to auto add retrun function ,in that you are just need write return jsx
-    return () => {
-        return (
-            <div onClick={handler}>
-                I am hello component
-                {props.children}
-            </div>
-        )
-    }
+    return (
+        <div onClick={handler}>
+            I am hello component
+            {props.children}
+        </div>
+    )
+
 }
 
 ```
 ```js
 //App.jsx App component
-import { ref } from "../../packages/review/dist/review.esm-bundler" 
+import { ref } from "@sakurasz/review" 
 import "./App.css"
 import { Hello } from "./Hello"
 export const App = () => {
@@ -79,29 +73,27 @@ export const App = () => {
     const give = () => {
         count.value++
     }
-    //you now show return a function as render function 
-    //I will write a plugin to auto add retrun function ,in that you are just need write return jsx
-    return () => {
-        return (
-            <div className="app">
-                <div>{count.value}</div>
-                <input type="text" name="" id="" onInput={handleInput} />
-                <div>{input.value}</div>
-                <button className="add" onClick={add}>
-                    add
-                </button>
-                <button className="deadd" onClick={deadd}>
-                    deadd
-                </button>
-                <Hello give={give}>Subcomponent passing</Hello>
-            </div>
-        )
-    }
+
+    return (
+        <div className="app">
+            <div>{count.value}</div>
+            <input type="text" name="" id="" onInput={handleInput} />
+            <div>{input.value}</div>
+            <button className="add" onClick={add}>
+                add
+            </button>
+            <button className="deadd" onClick={deadd}>
+                deadd
+            </button>
+            <Hello give={give}>Subcomponent passing</Hello>
+        </div>
+    )
+    
 }
 ```
 ```js
 //main.js
-import { createApp} from "../../packages/review/dist/review.esm-bundler"
+import { createApp} from "@sakurasz/review"
 import { App } from "./App"
 
 createApp(App).mount("#root")
