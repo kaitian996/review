@@ -528,7 +528,10 @@ export function createRenderer(rendererOptions: any) {
         const { shapeFlag, type } = n2
         if (n1 && !isSameVNodeType(n1, n2)) {
             //把n1删除
-            anchor = hostNextSibling(n1.el)
+            // anchor = hostNextSibling(n1.el)
+            anchor = hostNextSibling(
+                isFunction(n1.type) ? n1.component.subTree.el : n1.el
+            )
             unmount(n1)
             n1 = null
         }
