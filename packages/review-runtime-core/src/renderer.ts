@@ -35,7 +35,7 @@ export function createRenderer(rendererOptions: any) {
                     //需要渲染的子树
                     const subTree = (instance.subTree = instance.render.call())
 
-                    patch(null, subTree, container)
+                    patch(null, subTree, container, instance.anchor)
                     instance.isMounted = true
                     if (m) {
                         //要求子组件完成后调用自己
@@ -84,12 +84,13 @@ export function createRenderer(rendererOptions: any) {
         instance.next = null
     }
     //初始化
-    const mountComponent = (initialVNode, container) => {
+    const mountComponent = (initialVNode, container, anchor = null) => {
         //一定是STATEFUL_COMPONENT
         console.log("组件初始化挂载")
         //1、先有实例
         const instance = (initialVNode.component =
             createComponentInstance(initialVNode))
+        instance.anchor = anchor
         //2、执行函数组件，将render挂载到实例身上
         setupComponent(instance)
         //3、创建effect，让render执行
@@ -111,10 +112,10 @@ export function createRenderer(rendererOptions: any) {
             instance.vnode = n2
         }
     }
-    const processComponent = (n1, n2, container) => {
+    const processComponent = (n1, n2, container, anchor) => {
         if (n1 === null) {
             //初始化
-            mountComponent(n2, container)
+            mountComponent(n2, container, anchor)
         } else {
             //更新组件
             patchComponent(n1, n2, container)
@@ -543,7 +544,7 @@ export function createRenderer(rendererOptions: any) {
                 if (shapeFlag & ShapeFlags.ELEMENT) {
                     processElement(n1, n2, container, anchor)
                 } else if (shapeFlag & ShapeFlags.FUNCTIONAL_COMPONENT) {
-                    processComponent(n1, n2, container)
+                    processComponent(n1, n2, container, anchor)
                 }
                 break
         }

@@ -11,6 +11,7 @@ export function createComponentInstance(vnode) {
         ctx: {},
         render: null,
         isMounted: false, //表示组件是否挂载了
+        anchor: null,
     }
     instance.ctx = { _: instance }
     return instance
