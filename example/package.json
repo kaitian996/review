@@ -10,9 +10,7 @@
   },
   "dependencies": {
     "@sakurasz/review": "^1.0.0",
-    "@sakurasz/review-plugins": "^1.0.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@sakurasz/review-plugins": "^1.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
