@@ -1,8 +1,10 @@
 {
-  "name": "@review/review-runtime-core",
+  "name": "@sakurasz/review-runtime-core",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "module": "dist/review-runtime-core.esm-bundler.js",
+  "type": "module",
   "scripts": {
     "test": "vitest"
   },

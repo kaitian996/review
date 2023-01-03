@@ -1,8 +1,10 @@
 {
-  "name": "@review/review",
+  "name": "@sakurasz/review",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "module": "dist/review.esm-bundler.js",
+  "type": "module",
   "scripts": {
     "test": "vitest"
   },

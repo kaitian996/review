@@ -1,8 +1,11 @@
 {
-  "name": "@review/review-runtime-dom",
+  "name": "@sakurasz/review-runtime-dom",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "module": "dist/review-runtime-dom.esm-bundler.js",
+  "type": "module",
+
   "scripts": {
     "test": "vitest"
   },

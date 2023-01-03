@@ -1,8 +1,10 @@
 {
-  "name": "@review/review-reactivity",
+  "name": "@sakurasz/review-reactivity",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "module": "dist/review-reactivity.esm-bundler.js",
+  "type": "module",
   "scripts": {
     "test": "vitest"
   },
